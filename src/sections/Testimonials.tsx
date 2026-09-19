@@ -5,9 +5,15 @@ import styles from './Testimonials.module.css'
 /* How long the top card takes to fly off before the deck advances. */
 const FLY_MS = 480
 
+/* Only the front three cards of the stack are drawn. */
+const VISIBLE_CARDS = 3
+
 export function Testimonials() {
   const [index, setIndex] = useState(0)
   const [flying, setFlying] = useState(false)
+  const [expanded, setExpanded] = useState(false)
+  const [clipped, setClipped] = useState(false)
+  const quoteRef = useRef<HTMLQuoteElement>(null)
   const timer = useRef<number | null>(null)
 
   useEffect(() => {
@@ -16,8 +22,23 @@ export function Testimonials() {
     }
   }, [])
 
+  /* A quote taller than its clamp earns a Read more link. Measured, not guessed,
+     because the line count depends on the width and the font that loaded. */
+  useEffect(() => {
+    const el = quoteRef.current
+    if (!el || expanded) return
+
+    const measure = () => setClipped(el.scrollHeight > el.clientHeight + 1)
+    measure()
+
+    const observer = new ResizeObserver(measure)
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [index, expanded])
+
   const showNext = () => {
     if (flying) return
+    setExpanded(false)
     setFlying(true)
     timer.current = window.setTimeout(() => {
       setFlying(false)
@@ -34,7 +55,7 @@ export function Testimonials() {
       </h2>
 
       <div
-        className={styles.deck}
+        className={expanded ? `${styles.deck} ${styles.deckExpanded}` : styles.deck}
         data-reveal="80"
         role="button"
         tabIndex={0}
@@ -51,11 +72,14 @@ export function Testimonials() {
         {testimonials.map((testimonial, cardIndex) => {
           /* 0 is the card on top, 1 and 2 are the ones stacked behind it. */
           const position = (cardIndex - index + count) % count
-          const flyingOff = position === 0 && flying
+          if (position >= VISIBLE_CARDS) return null
+
+          const onTop = position === 0
+          const flyingOff = onTop && flying
           const direction = index % 2 === 0 ? 1 : -1
 
           const classNames = [styles.card]
-          if (position === 0) classNames.push(styles.cardTop)
+          if (onTop) classNames.push(styles.cardTop)
           if (position === 1) classNames.push(styles.cardSecond)
           if (position === 2) classNames.push(styles.cardThird)
           if (flyingOff) classNames.push(styles.cardFlying)
@@ -71,12 +95,32 @@ export function Testimonials() {
                     }
                   : undefined
               }
-              aria-hidden={position !== 0}
+              aria-hidden={!onTop}
             >
               <div className={styles.stars} aria-hidden="true">
                 ★★★★★
               </div>
-              <blockquote className={styles.quote}>{testimonial.quote}</blockquote>
+
+              <blockquote
+                ref={onTop ? quoteRef : undefined}
+                className={onTop && expanded ? styles.quote : `${styles.quote} ${styles.quoteClamped}`}
+              >
+                {testimonial.quote}
+              </blockquote>
+
+              {onTop && (clipped || expanded) && (
+                <button
+                  type="button"
+                  className={styles.more}
+                  onClick={(event) => {
+                    event.stopPropagation()
+                    setExpanded((open) => !open)
+                  }}
+                >
+                  {expanded ? 'Read less' : 'Read more'}
+                </button>
+              )}
+
               <figcaption className={styles.who}>{testimonial.who}</figcaption>
             </figure>
           )
@@ -91,10 +135,6 @@ export function Testimonials() {
           />
         ))}
       </div>
-
-      <p className={styles.note} data-reveal="200">
-        Sample reviews. Swap in real client quotes.
-      </p>
     </section>
   )
 }

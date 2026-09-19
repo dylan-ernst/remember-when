@@ -25,7 +25,8 @@ export function Contact() {
     event.preventDefault()
     if (status === 'sending') return
 
-    const data = new FormData(event.currentTarget)
+    const form = event.currentTarget
+    const data = new FormData(form)
     const read = (field: string) => String(data.get(field) ?? '').trim()
     const fields: InquiryFields = {
       first: read('first'),
@@ -38,6 +39,8 @@ export function Contact() {
     setStatus('sending')
     try {
       await sendInquiry(fields)
+      /* Nothing left to resend, so don't leave the visitor's words sitting there. */
+      form.reset()
       setStatus('sent')
     } catch {
       /* Never swallow it: hand the visitor a way to reach the inbox anyway. */
@@ -153,7 +156,9 @@ export function Contact() {
 
             {status === 'sent' && (
               <p className={styles.sent} role="status">
-                {form.sentMessage}
+                {form.sentMessageLead}
+                <br />
+                {form.sentMessageBody}
               </p>
             )}
 

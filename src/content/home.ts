@@ -101,22 +101,26 @@ export const gallery: readonly string[] = [
   gallery6,
 ]
 
-/* Placeholder copy. Swap in real client quotes before launch. */
+/* Real Google reviews. Em dash and spacing tidied, wording untouched. */
 export const testimonials: readonly Testimonial[] = [
   {
     quote:
-      '“The booth was the highlight of our reception. Our guests would not leave it alone. The photo strips came out beautiful.”',
-    who: 'Sample: Wedding, Anaheim',
+      'We had SO much fun with this Photo Booth! Everything ran so smoothly from start to finish. Shayne was amazing, super kind, professional, and very easy to communicate with throughout the whole process. The photos printed out right away, and we also loved that we could message them to ourselves instantly. Such a fun and convenient touch! We also ordered a jumbo head and I 100% recommend it, it was a huge hit and made everything even more fun. I wish I could leave 1000000 stars! Highly recommend for any event! 🎉✨',
+    who: 'Roxy Habash',
   },
   {
     quote:
-      '“So easy to work with from booking to breakdown. The attendant kept the line moving and the kids laughing all night.”',
-    who: 'Sample: School Dance, Irvine',
+      'I had Remember When at my wedding and they were a hit! All my guests and myself loved the Photo Booth! The extra decor they brought made the booth so much fun! I can’t recommend them enough! They had giant cut outs of mine and my husband’s head. They were a huge hit!',
+    who: 'Ashleigh Adner',
   },
   {
     quote:
-      '“We did the Keepsakes package and the memory book made everyone cry (happy tears). Worth every penny.”',
-    who: 'Sample: 50th Birthday, Orange',
+      'Had so much fun having Remember When at my event! They are incredibly kind and professional. All of my guests had an amazing time and I will absolutely be using them again for future events!',
+    who: 'Sydney Pokard',
+  },
+  {
+    quote: 'The best photobooth! Always so professional and great quality photos.',
+    who: 'Lucy Pittman',
   },
 ]
 

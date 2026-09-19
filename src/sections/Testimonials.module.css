@@ -14,9 +14,21 @@
 .deck {
   position: relative;
   max-width: 640px;
+  /* The base card is always this tall, whatever the review's length. */
   height: 340px;
   margin: 0 auto;
   cursor: pointer;
+}
+
+/* Reading the rest is the one thing allowed to grow the card: the front card
+   rejoins the flow so its full height drives the deck. */
+.deckExpanded {
+  height: auto;
+  min-height: 340px;
+}
+
+.deckExpanded .cardTop {
+  position: relative;
 }
 
 .deck:focus-visible {
@@ -80,6 +92,33 @@
   color: var(--c-cream-92);
 }
 
+.quoteClamped {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+  overflow: hidden;
+}
+
+.more {
+  align-self: flex-start;
+  margin: 0 0 14px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--c-yellow);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.more:hover {
+  color: var(--c-gold);
+}
+
 .who {
   font-family: var(--font-display);
   font-weight: 700;
@@ -104,10 +143,4 @@
 
 .dotActive {
   background: var(--c-yellow);
-}
-
-.note {
-  margin: 16px 0 0;
-  font-size: 13px;
-  color: var(--c-cream-45);
 }
