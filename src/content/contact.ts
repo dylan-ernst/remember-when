@@ -16,7 +16,9 @@ export const contactPage = {
   form: {
     heading: 'Tell us about your event',
     submitLabel: 'SEND MESSAGE',
-    sentMessage:
-      'Opening your email app with the message ready to send. We’ll get back to you shortly.',
+    sendingLabel: 'SENDING...',
+    sentMessage: 'Thank you. Your message is in and we will get back to you shortly.',
+    errorMessage: 'That did not go through.',
+    errorLinkLabel: 'Send it by email instead.',
   },
 } as const

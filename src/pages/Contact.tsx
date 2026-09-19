@@ -3,36 +3,47 @@ import type { FormEvent } from 'react'
 import { PageHero } from '../components/PageHero'
 import { contactPage } from '../content/contact'
 import { site } from '../content/site'
+import type { InquiryFields } from '../lib/inquiry'
+import { sendInquiry } from '../lib/inquiry'
 import { buildInquiryMailto } from '../lib/mailto'
 import { useRevealGroup } from '../hooks/useRevealGroup'
 import { usePageTitle } from '../hooks/usePageTitle'
 import styles from './Contact.module.css'
 
+type Status = 'idle' | 'sending' | 'sent' | 'error'
+
 export function Contact() {
   const pageRef = useRef<HTMLDivElement>(null)
-  const [sent, setSent] = useState(false)
+  const [status, setStatus] = useState<Status>('idle')
+  const [fallback, setFallback] = useState('')
   useRevealGroup(pageRef)
   usePageTitle('Contact | Remember When Photo Booth')
 
   const { hero, feature, form } = contactPage
 
-  /* No back end yet: the form hands the message to the visitor's mail app. */
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    if (status === 'sending') return
 
     const data = new FormData(event.currentTarget)
     const read = (field: string) => String(data.get(field) ?? '').trim()
+    const fields: InquiryFields = {
+      first: read('first'),
+      last: read('last'),
+      email: read('email'),
+      date: read('date'),
+      message: read('message'),
+    }
 
-    window.location.assign(
-      buildInquiryMailto(site.email, {
-        first: read('first'),
-        last: read('last'),
-        email: read('email'),
-        date: read('date'),
-        message: read('message'),
-      }),
-    )
-    setSent(true)
+    setStatus('sending')
+    try {
+      await sendInquiry(fields)
+      setStatus('sent')
+    } catch {
+      /* Never swallow it: hand the visitor a way to reach the inbox anyway. */
+      setFallback(buildInquiryMailto(site.email, fields))
+      setStatus('error')
+    }
   }
 
   return (
@@ -136,13 +147,20 @@ export function Contact() {
               placeholder="Tell us about your event..."
             />
 
-            <button type="submit" className={styles.submit}>
-              {form.submitLabel}
+            <button type="submit" className={styles.submit} disabled={status === 'sending'}>
+              {status === 'sending' ? form.sendingLabel : form.submitLabel}
             </button>
 
-            {sent && (
+            {status === 'sent' && (
               <p className={styles.sent} role="status">
                 {form.sentMessage}
+              </p>
+            )}
+
+            {status === 'error' && (
+              <p className={styles.error} role="status">
+                {form.errorMessage}{' '}
+                <a href={fallback}>{form.errorLinkLabel}</a>
               </p>
             )}
           </form>

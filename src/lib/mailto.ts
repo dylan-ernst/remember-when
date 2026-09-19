@@ -1,17 +1,12 @@
-export type InquiryFields = {
-  first: string
-  last: string
-  email: string
-  date: string
-  message: string
-}
+import type { InquiryFields } from './inquiry'
+import { fullName } from './inquiry'
 
 /**
- * Builds the mailto link the contact form hands to the visitor's mail app.
+ * Builds the mailto link offered when the inquiry cannot be posted.
  * Every value is URL-encoded, so text the visitor typed cannot alter the link.
  */
 export function buildInquiryMailto(to: string, fields: InquiryFields): string {
-  const name = [fields.first, fields.last].filter(Boolean).join(' ')
+  const name = fullName(fields)
   const subject = `Photo booth inquiry: ${name}`
   const body = [
     `Name: ${name}`,
