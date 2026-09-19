@@ -11,29 +11,15 @@ export function Hero() {
   const isMobile = useIsMobile()
   const sectionRef = useRef<HTMLElement>(null)
   const imageRef = useRef<HTMLImageElement>(null)
-  const videoRef = useRef<HTMLVideoElement>(null)
 
+  /* The still hero pushes into the page as it scrolls away. */
   const update = useCallback(() => {
     const section = sectionRef.current
-    if (!section) return
-
-    const rect = section.getBoundingClientRect()
-
-    /* The still hero pushes into the page as it scrolls away. */
     const image = imageRef.current
-    if (image) {
-      const progress = clamp01(-rect.top / window.innerHeight)
-      image.style.transform = `scale(${1.05 + progress * 0.28}) translateY(${progress * 40}px)`
-    }
+    if (!section || !image) return
 
-    /* The video stays put instead: it is pushed down by exactly the distance
-       scrolled, so the copy and the next section slide up over it. The hero's
-       own overflow clips it once the section has gone by. */
-    const video = videoRef.current
-    if (video) {
-      const held = Math.min(Math.max(-rect.top, 0), rect.height)
-      video.style.transform = `translate(-50%, -50%) translateY(${held}px)`
-    }
+    const progress = clamp01(-section.getBoundingClientRect().top / window.innerHeight)
+    image.style.transform = `scale(${1.05 + progress * 0.28}) translateY(${progress * 40}px)`
   }, [])
 
   useScrollDriven(update)
@@ -60,7 +46,6 @@ export function Hero() {
     return (
       <section ref={sectionRef} className={`${styles.hero} ${styles.heroMobile}`}>
         <video
-          ref={videoRef}
           className={styles.video}
           src={hero.video}
           autoPlay
