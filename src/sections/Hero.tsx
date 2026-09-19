@@ -45,15 +45,17 @@ export function Hero() {
   if (isMobile) {
     return (
       <section ref={sectionRef} className={`${styles.hero} ${styles.heroMobile}`}>
-        <video
-          className={styles.video}
-          src={hero.video}
-          autoPlay
-          muted
-          playsInline
-          preload="auto"
-        />
-        <div className={styles.scrimMobile} />
+        {/* Fixed, so holding still costs no scroll handler and cannot judder. */}
+        <div className={styles.videoLayer}>
+          <video
+            className={styles.video}
+            src={hero.video}
+            autoPlay
+            muted
+            playsInline
+            preload="auto"
+          />
+        </div>
         <div className={styles.contentMobile} data-reveal="600">
           <h1 className={styles.headlineMobile}>{headline}</h1>
           <p className={styles.blurbMobile}>{hero.blurb}</p>

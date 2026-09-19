@@ -1,0 +1,8 @@
+/* Everything below the hero rides over the held video, so it needs to be
+   positioned (a fixed layer paints above static content whatever the order)
+   and opaque. */
+.belowHero {
+  position: relative;
+  z-index: 1;
+  background: var(--c-bg);
+}

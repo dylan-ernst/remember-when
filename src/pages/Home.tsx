@@ -8,6 +8,7 @@ import { Manifesto } from '../sections/Manifesto'
 import { Packages } from '../sections/Packages'
 import { Testimonials } from '../sections/Testimonials'
 import { useRevealGroup } from '../hooks/useRevealGroup'
+import styles from './Home.module.css'
 import { usePageTitle } from '../hooks/usePageTitle'
 
 export function Home() {
@@ -18,13 +19,15 @@ export function Home() {
   return (
     <div ref={pageRef}>
       <Hero />
-      <EventGrid />
-      <Manifesto />
-      <Packages />
-      <GalleryMarquee />
-      <Testimonials />
-      <AboutIntro />
-      <InstagramBanner />
+      <div className={styles.belowHero}>
+        <EventGrid />
+        <Manifesto />
+        <Packages />
+        <GalleryMarquee />
+        <Testimonials />
+        <AboutIntro />
+        <InstagramBanner />
+      </div>
     </div>
   )
 }

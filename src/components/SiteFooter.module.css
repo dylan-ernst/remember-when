@@ -1,4 +1,7 @@
 .footer {
+  /* Positioned so the home page's fixed hero video cannot paint over it. */
+  position: relative;
+  z-index: 1;
   background: var(--c-footer);
   padding: clamp(48px, 7vw, 72px) var(--pad-inline) 36px;
 }
