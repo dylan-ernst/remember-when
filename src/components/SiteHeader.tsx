@@ -55,9 +55,16 @@ export function SiteHeader() {
               {link.label}
             </NavLink>
           ))}
-          <Link to="/contact" className={styles.bookButton}>
-            BOOK NOW
-          </Link>
+          {/* On the contact page itself, the pill offers the faster route. */}
+          {location.pathname === '/contact' ? (
+            <a href={site.phone.href} className={styles.bookButton}>
+              CALL US
+            </a>
+          ) : (
+            <Link to="/contact" className={styles.bookButton}>
+              BOOK NOW
+            </Link>
+          )}
         </nav>
 
         <button

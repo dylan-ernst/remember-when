@@ -8,10 +8,12 @@ import { Manifesto } from '../sections/Manifesto'
 import { Packages } from '../sections/Packages'
 import { Testimonials } from '../sections/Testimonials'
 import { useRevealGroup } from '../hooks/useRevealGroup'
+import { usePageTitle } from '../hooks/usePageTitle'
 
 export function Home() {
   const pageRef = useRef<HTMLDivElement>(null)
   useRevealGroup(pageRef)
+  usePageTitle('Remember When Photo Booth | Orange County Photo Booth Rentals')
 
   return (
     <div ref={pageRef}>

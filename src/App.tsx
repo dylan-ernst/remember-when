@@ -1,7 +1,10 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Layout } from './components/Layout'
-import { ComingSoon } from './pages/ComingSoon'
+import { About } from './pages/About'
+import { Contact } from './pages/Contact'
 import { Home } from './pages/Home'
+import { NotFound } from './pages/NotFound'
+import { Services } from './pages/Services'
 
 export function App() {
   return (
@@ -9,10 +12,10 @@ export function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="about" element={<ComingSoon title="ABOUT US" />} />
-          <Route path="services" element={<ComingSoon title="SERVICES" />} />
-          <Route path="contact" element={<ComingSoon title="CONTACT" />} />
-          <Route path="*" element={<ComingSoon title="PAGE NOT FOUND" />} />
+          <Route path="about" element={<About />} />
+          <Route path="services" element={<Services />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>

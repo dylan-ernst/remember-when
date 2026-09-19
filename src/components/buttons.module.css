@@ -1,0 +1,56 @@
+/* The three button shapes the site uses outside the home hero. */
+.solid {
+  display: inline-block;
+  padding: 16px 34px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: var(--c-gold);
+  color: var(--c-ink);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 17px;
+  letter-spacing: 0.5px;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+.solid:hover {
+  background: var(--c-yellow);
+  color: var(--c-ink);
+}
+
+.outline {
+  display: inline-block;
+  padding: 14px 32px;
+  border: 2px solid var(--c-gold);
+  border-radius: var(--radius-pill);
+  color: var(--c-yellow);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 17px;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+.outline:hover {
+  background: var(--c-gold);
+  color: var(--c-ink);
+}
+
+.quiet {
+  padding: 16px 10px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--c-yellow);
+}
+
+.quiet:hover {
+  color: var(--c-gold);
+}

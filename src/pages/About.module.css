@@ -1,0 +1,70 @@
+.hero {
+  --hero-height: 70svh;
+  --hero-min-height: 460px;
+  --hero-object-position: center 0%;
+}
+
+.band {
+  --band-height: 150vh;
+  --band-scrim: 0.58;
+  --band-text-width: 780px;
+  --band-object-position: center 25%;
+}
+
+.bandLine {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(28px, 5vw, 52px);
+  line-height: 1.18;
+  color: var(--c-cream);
+}
+
+.accent {
+  color: var(--c-yellow);
+}
+
+.prose {
+  padding: clamp(56px, 8vw, 100px) var(--pad-inline);
+}
+
+.proseAlt {
+  background: var(--c-bg-alt);
+}
+
+.column {
+  max-width: 720px;
+  margin: 0 auto;
+  font-size: clamp(16.5px, 1.9vw, 18.5px);
+  line-height: 1.75;
+  color: var(--c-cream-92);
+}
+
+.paragraph {
+  margin: 0 0 24px;
+  text-wrap: pretty;
+}
+
+.paragraph:last-child {
+  margin-bottom: 0;
+}
+
+.highlight {
+  font-style: normal;
+  font-weight: 700;
+  color: var(--c-yellow);
+}
+
+.signature {
+  margin: 8px 0 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 22px;
+  color: var(--c-yellow);
+}
+
+.signatureSub {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--c-gold);
+}

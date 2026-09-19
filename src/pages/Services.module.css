@@ -1,0 +1,278 @@
+.hero {
+  --hero-height: 64svh;
+  --hero-min-height: 440px;
+  --hero-object-position: center 20%;
+}
+
+.band {
+  --band-height: 150vh;
+  --band-scrim: 0.6;
+  --band-text-width: 760px;
+}
+
+.bandLine {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(28px, 5vw, 52px);
+  line-height: 1.15;
+  color: var(--c-cream);
+}
+
+.accent {
+  color: var(--c-yellow);
+}
+
+.tiersSection {
+  padding: clamp(56px, 8vw, 100px) var(--pad-inline);
+}
+
+.tiers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  align-items: stretch;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.tier {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 34px 28px;
+  border-radius: 22px;
+  background: var(--c-card);
+  border: 1.5px solid var(--c-border-gold-soft);
+}
+
+.tierPopular {
+  background: var(--c-card-raised);
+  border-color: var(--c-gold);
+}
+
+.badge {
+  position: absolute;
+  top: -14px;
+  left: 26px;
+  padding: 7px 16px;
+  border-radius: var(--radius-pill);
+  background: var(--c-yellow);
+  color: var(--c-ink);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.tierName {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(26px, 3vw, 32px);
+  color: var(--c-yellow);
+}
+
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 8px 0 2px;
+}
+
+.price {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 52px;
+  color: var(--c-cream);
+}
+
+.unit {
+  font-size: 14px;
+  color: var(--c-cream-65);
+}
+
+.basedOn {
+  display: inline-block;
+  margin: 12px 0 4px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 12.5px;
+  letter-spacing: 1.5px;
+  color: var(--c-gold);
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  flex: 1;
+  align-content: start;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.feature {
+  display: flex;
+  gap: 11px;
+  font-size: 15.5px;
+  line-height: 1.45;
+  color: var(--c-cream-92);
+}
+
+.check {
+  color: var(--c-yellow);
+  font-weight: 700;
+}
+
+.note {
+  margin: 16px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 246, 227, 0.12);
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(255, 246, 227, 0.6);
+}
+
+.tierCta {
+  margin-top: 24px;
+  padding: 14px 24px;
+  border: 2px solid var(--c-gold);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--c-yellow);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 16px;
+  text-align: center;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.tierCtaSolid {
+  background: var(--c-gold);
+  color: var(--c-ink);
+}
+
+.tierCta:hover {
+  background: var(--c-yellow);
+  border-color: var(--c-yellow);
+  color: var(--c-ink);
+}
+
+.addonsSection {
+  padding: clamp(56px, 8vw, 100px) var(--pad-inline);
+  background: var(--c-bg-alt);
+}
+
+.addonsInner {
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.addonsEyebrow {
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 3px;
+  color: var(--c-gold);
+  text-align: center;
+}
+
+.addonsHeading {
+  margin: 0 0 36px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(28px, 4.4vw, 48px);
+  color: var(--c-cream);
+  text-align: center;
+}
+
+.addons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.addon {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  padding: 22px;
+  border-radius: var(--radius-card);
+  background: var(--c-card);
+  border: 1.5px solid var(--c-border-gold-faint);
+  transition: border-color 0.25s ease;
+}
+
+.addon:hover {
+  border-color: var(--c-gold);
+}
+
+.addonFrame {
+  position: relative;
+  display: block;
+  flex: none;
+  width: 86px;
+  height: 86px;
+  overflow: hidden;
+  border-radius: var(--radius-tile);
+  border: 1.5px solid rgba(241, 169, 0, 0.45);
+}
+
+.addonImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.addonBody {
+  min-width: 0;
+}
+
+.addonTop {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.addonName {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--c-cream);
+}
+
+.addonPrice {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 20px;
+  color: var(--c-yellow);
+  white-space: nowrap;
+}
+
+.addonDescription {
+  display: block;
+  margin-top: 4px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: rgba(255, 246, 227, 0.7);
+}
+
+@media (max-width: 899px) {
+  .tiers {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 679px) {
+  .addons {
+    grid-template-columns: 1fr;
+  }
+}
