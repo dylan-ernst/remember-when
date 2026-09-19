@@ -1,0 +1,172 @@
+.hero {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  height: 100svh;
+  min-height: 560px;
+  overflow: hidden;
+}
+
+.heroMobile {
+  min-height: 520px;
+  background: var(--c-bg);
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.05);
+}
+
+.video {
+  position: absolute;
+  left: 50%;
+  top: 36%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 85%;
+  object-fit: contain;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(19, 16, 23, 0.45) 0%,
+    rgba(19, 16, 23, 0.25) 40%,
+    rgba(19, 16, 23, 0.92) 100%
+  );
+}
+
+.scrimMobile {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(19, 16, 23, 0) 55%, rgba(19, 16, 23, 0.9) 100%);
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  padding: 0 clamp(20px, 6vw, 72px) clamp(48px, 9vh, 90px);
+}
+
+.mark {
+  width: clamp(64px, 10vw, 92px);
+  height: auto;
+  margin-bottom: 18px;
+}
+
+.headline {
+  margin: 0 0 18px;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(38px, 7.5vw, 76px);
+  line-height: 1.02;
+  color: var(--c-cream);
+  text-wrap: pretty;
+}
+
+.headlineAccent {
+  color: var(--c-yellow);
+}
+
+.blurb {
+  margin: 0 0 30px;
+  max-width: 560px;
+  font-size: clamp(17px, 2.2vw, 21px);
+  line-height: 1.55;
+  color: var(--c-cream-92);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+}
+
+.cta {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 17px;
+  letter-spacing: 0.5px;
+  background: var(--c-gold);
+  color: var(--c-ink);
+  padding: 16px 32px;
+  border-radius: var(--radius-pill);
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+.cta:hover {
+  background: var(--c-yellow);
+  color: var(--c-ink);
+}
+
+.phone {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--c-yellow);
+  padding: 16px 10px;
+}
+
+.phone:hover {
+  color: var(--c-gold);
+}
+
+/* Phone hero: the video carries the brand, so the copy sits under it. */
+.contentMobile {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 0 20px clamp(40px, 7vh, 64px);
+  text-align: center;
+}
+
+.headlineMobile {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.blurbMobile {
+  margin: 0;
+  max-width: 480px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--c-cream-92);
+}
+
+.actionsMobile {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.actionsMobile .cta {
+  font-size: 16px;
+  padding: 15px 30px;
+}
+
+.actionsMobile .phone {
+  font-size: 15px;
+  padding: 12px 8px;
+}

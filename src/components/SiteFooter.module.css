@@ -1,0 +1,80 @@
+.footer {
+  background: var(--c-footer);
+  padding: clamp(48px, 7vw, 72px) var(--pad-inline) 36px;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1.4fr;
+  gap: 32px;
+  margin-bottom: 44px;
+}
+
+.logo {
+  width: min(240px, 80%);
+  height: auto;
+  margin-bottom: 12px;
+}
+
+.tagline {
+  margin: 0;
+  font-size: clamp(12px, 3.4vw, 14.5px);
+  line-height: 1.6;
+  color: var(--c-cream-65);
+  white-space: nowrap;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.navLink {
+  color: var(--c-cream);
+  transition: color 0.25s ease;
+}
+
+.navLink:hover {
+  color: var(--c-yellow);
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 15px;
+}
+
+.email {
+  word-break: break-all;
+}
+
+.area {
+  color: var(--c-cream-65);
+}
+
+.bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 22px;
+  border-top: 1px solid var(--c-hairline);
+  font-size: 13px;
+  color: var(--c-cream-40);
+}
+
+.bottom p {
+  margin: 0;
+}
+
+@media (max-width: 599px) {
+  .columns {
+    grid-template-columns: 1fr;
+  }
+}

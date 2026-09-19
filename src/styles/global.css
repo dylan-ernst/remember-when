@@ -1,0 +1,83 @@
+@import './tokens.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  /* The native scrollbar never shows on this site; scrolling still works. */
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  background: var(--c-bg);
+  color: var(--c-cream);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100%;
+}
+
+a {
+  color: var(--c-yellow);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--c-gold);
+}
+
+::selection {
+  background: var(--c-gold);
+  color: var(--c-bg);
+}
+
+img,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* Scroll reveal: elements start offset and settle once they enter view. */
+.reveal {
+  opacity: 0;
+  transform: translateY(34px);
+  transition:
+    opacity var(--reveal-duration) ease,
+    transform var(--reveal-duration) var(--ease-out-soft);
+}
+
+.reveal[data-visible='true'] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

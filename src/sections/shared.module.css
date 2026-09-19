@@ -1,0 +1,21 @@
+/* Section chrome shared by every band on the page. */
+.section {
+  padding: var(--pad-section);
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 3px;
+  color: var(--c-gold);
+}
+
+.heading {
+  margin: 0 0 40px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(30px, 4.6vw, 52px);
+  color: var(--c-cream);
+}

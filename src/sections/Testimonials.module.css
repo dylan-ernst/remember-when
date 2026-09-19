@@ -1,0 +1,113 @@
+.section {
+  padding: clamp(56px, 9vw, 110px) var(--pad-inline);
+}
+
+.heading {
+  margin: 0 0 36px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(28px, 4vw, 44px);
+  color: var(--c-cream);
+  text-align: center;
+}
+
+.deck {
+  position: relative;
+  max-width: 640px;
+  height: 340px;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.deck:focus-visible {
+  outline: 2px solid var(--c-gold);
+  outline-offset: 8px;
+  border-radius: var(--radius-card);
+}
+
+.card {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0;
+  padding: clamp(24px, 4vw, 36px) clamp(22px, 4vw, 34px);
+  border-radius: var(--radius-card);
+  background: var(--c-card);
+  border: 1.5px solid var(--c-border-gold-faint);
+  transition:
+    transform 0.55s var(--ease-out-soft),
+    opacity 0.55s ease;
+}
+
+.cardTop {
+  z-index: 3;
+  opacity: 1;
+  background: var(--c-card-raised);
+  border-color: var(--c-gold);
+  transform: translate(0, 0) rotate(0deg) scale(1);
+}
+
+.cardSecond {
+  z-index: 2;
+  opacity: 1;
+  transform: translate(14px, 14px) rotate(2deg) scale(0.97);
+}
+
+.cardThird {
+  z-index: 1;
+  opacity: 0.55;
+  transform: translate(-14px, 20px) rotate(-2deg) scale(0.94);
+}
+
+.cardFlying {
+  z-index: 4;
+  opacity: 0;
+}
+
+.stars {
+  margin-bottom: 14px;
+  font-size: 18px;
+  letter-spacing: 3px;
+  color: var(--c-yellow);
+}
+
+.quote {
+  margin: 0 0 16px;
+  font-size: clamp(15.5px, 2vw, 17.5px);
+  line-height: 1.6;
+  color: var(--c-cream-92);
+}
+
+.who {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--c-gold);
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--c-cream-25);
+  transition: background 0.3s ease;
+}
+
+.dotActive {
+  background: var(--c-yellow);
+}
+
+.note {
+  margin: 16px 0 0;
+  font-size: 13px;
+  color: var(--c-cream-45);
+}

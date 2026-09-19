@@ -1,0 +1,55 @@
+/* Single source of truth for the brand. Re-skinning the site happens here. */
+@font-face {
+  font-family: 'Funtime';
+  src: url('../assets/fonts/funtime.otf') format('opentype');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+:root {
+  /* Surfaces, darkest to lightest */
+  --c-footer: #0e0b12;
+  --c-bg: #131017;
+  --c-bg-alt: #171320;
+  --c-card: #1c1722;
+  --c-card-raised: #221a28;
+
+  /* Brand */
+  --c-yellow: #ffd602;
+  --c-gold: #f1a900;
+  --c-ink: #1a1305;
+  --c-cream: #fff6e3;
+
+  /* Cream at the opacities the design uses */
+  --c-cream-92: rgba(255, 246, 227, 0.92);
+  --c-cream-90: rgba(255, 246, 227, 0.9);
+  --c-cream-65: rgba(255, 246, 227, 0.65);
+  --c-cream-45: rgba(255, 246, 227, 0.45);
+  --c-cream-40: rgba(255, 246, 227, 0.4);
+  --c-cream-25: rgba(255, 246, 227, 0.25);
+  --c-hairline: rgba(255, 246, 227, 0.1);
+
+  --c-border-gold-soft: rgba(241, 169, 0, 0.25);
+  --c-border-gold-faint: rgba(241, 169, 0, 0.22);
+
+  /* Type */
+  --font-display: 'Funtime', 'Grandstander', cursive;
+  --font-body: 'Karla', sans-serif;
+
+  /* Rhythm */
+  --pad-section: clamp(64px, 10vw, 120px) clamp(20px, 5vw, 64px);
+  --pad-inline: clamp(20px, 5vw, 64px);
+  --gap-grid: 18px;
+
+  --radius-card: 18px;
+  --radius-frame: 20px;
+  --radius-tile: 16px;
+  --radius-pill: 999px;
+
+  /* Motion */
+  --ease-out-soft: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --marquee-duration: 48s;
+  --reveal-duration: 0.85s;
+
+  --header-height: 74px;
+}

@@ -1,0 +1,42 @@
+.section {
+  padding: clamp(56px, 8vw, 90px) 0;
+  overflow: hidden;
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  animation: marquee var(--marquee-duration) linear infinite;
+}
+
+/* The gap lives on the items, not the row: a flex `gap` would leave one extra
+   gap between the two passes and the loop would jump 16px on every reset. */
+.photo {
+  flex: none;
+  margin-right: 16px;
+  width: clamp(250px, 36vw, 400px);
+  height: clamp(180px, 26vw, 280px);
+  object-fit: cover;
+  border-radius: var(--radius-tile);
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+  }
+
+  .section {
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+  }
+}
