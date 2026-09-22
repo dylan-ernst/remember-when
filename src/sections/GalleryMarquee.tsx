@@ -1,18 +1,19 @@
-import { gallery } from '../content/home'
+import type { HomeContent } from '../content/types'
+import { sizedUrl } from '../lib/images'
 import styles from './GalleryMarquee.module.css'
 
-export function GalleryMarquee() {
+export function GalleryMarquee({ gallery }: Pick<HomeContent, 'gallery'>) {
   return (
     <section className={styles.section} aria-label="Photo booth gallery">
       {/* The list runs twice so the loop can reset at the halfway point unseen. */}
       <div className={styles.track}>
         {[0, 1].map((pass) =>
-          gallery.map((photo, index) => (
+          gallery.map((photo) => (
             <img
-              key={`${pass}-${photo}`}
+              key={`${pass}-${photo._key}`}
               className={styles.photo}
-              src={photo}
-              alt={pass === 0 ? `Photo booth moment ${index + 1}` : ''}
+              src={sizedUrl(photo.url, 900)}
+              alt={pass === 0 ? photo.alt : ''}
               aria-hidden={pass === 1}
               loading="lazy"
             />

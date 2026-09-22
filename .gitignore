@@ -6,3 +6,6 @@ dist
 # Original full-size client uploads; optimised copies live in src/assets.
 # The leading slash keeps this to the root folder, not src/content.
 /content/
+
+# Sanity Studio runtime cache
+.sanity/

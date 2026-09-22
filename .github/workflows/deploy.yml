@@ -3,6 +3,8 @@ name: Deploy site
 on:
   push:
     branches: [main]
+    # Studio-only changes do not affect the built site.
+    paths-ignore: ['studio/**']
   workflow_dispatch:
 
 permissions:
@@ -28,6 +30,8 @@ jobs:
         env:
           # Repo variable wins; an unset variable arrives as an empty string.
           VITE_BASE: ${{ vars.VITE_BASE || '/remember-when/' }}
+          VITE_SANITY_PROJECT_ID: ${{ vars.SANITY_PROJECT_ID || 'zmnh8ng0' }}
+          VITE_SANITY_DATASET: ${{ vars.SANITY_DATASET || 'production' }}
       - name: Add SPA fallback
         # Pages serves 404.html for unknown paths, which is how deep links reach the router.
         run: cp dist/index.html dist/404.html

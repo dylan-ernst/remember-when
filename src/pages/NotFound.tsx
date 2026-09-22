@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom'
-import { site } from '../content/site'
+import type { SiteSettings } from '../content/types'
 import { usePageTitle } from '../hooks/usePageTitle'
+import { telHref } from '../lib/phone'
 import styles from './NotFound.module.css'
 
-export function NotFound() {
+export function NotFound({ settings }: { settings: SiteSettings }) {
   usePageTitle('Page not found | Remember When Photo Booth')
 
   return (
@@ -18,8 +19,8 @@ export function NotFound() {
         <Link to="/" className={styles.cta}>
           BACK HOME
         </Link>
-        <a href={site.phone.href} className={styles.back}>
-          {site.phone.display}
+        <a href={telHref(settings.phone)} className={styles.back}>
+          {settings.phone}
         </a>
       </div>
     </section>

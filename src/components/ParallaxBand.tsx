@@ -1,13 +1,14 @@
 import { useCallback, useRef } from 'react'
 import type { ReactNode } from 'react'
+import type { SiteImage } from '../content/types'
 import { clamp01, useScrollDriven } from '../hooks/useScrollDriven'
+import { focalStyle, sizedUrl } from '../lib/images'
 import styles from './ParallaxBand.module.css'
 
 const MOBILE_MAX_WIDTH = 859
 
 type ParallaxBandProps = {
-  image: string
-  alt: string
+  image: SiteImage
   /* Page module class carrying the height, scrim and crop custom properties. */
   className?: string
   /** Backdrop travel across the whole band, in px. */
@@ -25,7 +26,6 @@ type ParallaxBandProps = {
  */
 export function ParallaxBand({
   image,
-  alt,
   className,
   drift = 120,
   driftMobile = 35,
@@ -65,7 +65,14 @@ export function ParallaxBand({
       className={className ? `${styles.section} ${className}` : styles.section}
     >
       <div className={styles.sticky}>
-        <img ref={imageRef} className={styles.image} src={image} alt={alt} loading="lazy" />
+        <img
+          ref={imageRef}
+          className={styles.image}
+          src={sizedUrl(image.url, 2400)}
+          alt={image.alt}
+          style={focalStyle(image)}
+          loading="lazy"
+        />
         <div className={styles.scrim} />
         <div ref={textRef} className={styles.text}>
           {children}

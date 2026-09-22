@@ -1,0 +1,50 @@
+.banner {
+  display: block;
+  padding: clamp(56px, 8vw, 90px) 24px;
+  background: linear-gradient(120deg, var(--c-gold), var(--c-yellow));
+  color: var(--c-ink);
+  text-align: center;
+}
+
+.label {
+  display: block;
+  margin-bottom: 8px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 3px;
+}
+
+.handle {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(28px, 6vw, 56px);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: clamp(18px, 3vw, 26px);
+}
+
+.link {
+  padding: 10px 26px;
+  border: 2px solid var(--c-ink);
+  border-radius: 999px;
+  color: var(--c-ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.link:hover,
+.link:focus-visible {
+  background: var(--c-ink);
+  color: var(--c-yellow);
+}

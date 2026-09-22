@@ -1,19 +1,20 @@
 import { useCallback, useRef } from 'react'
+import type { SiteImage } from '../content/types'
 import { clamp01, useScrollDriven } from '../hooks/useScrollDriven'
+import { focalStyle, sizedUrl } from '../lib/images'
 import styles from './PageHero.module.css'
 
 type PageHeroProps = {
   eyebrow: string
   title: string
   lead?: string
-  image: string
-  alt: string
+  image: SiteImage
   /* Page module class carrying the height and crop custom properties. */
   className?: string
 }
 
 /** The photo banner every inner page opens with. */
-export function PageHero({ eyebrow, title, lead, image, alt, className }: PageHeroProps) {
+export function PageHero({ eyebrow, title, lead, image, className }: PageHeroProps) {
   const sectionRef = useRef<HTMLElement>(null)
   const imageRef = useRef<HTMLImageElement>(null)
 
@@ -30,7 +31,15 @@ export function PageHero({ eyebrow, title, lead, image, alt, className }: PageHe
 
   return (
     <section ref={sectionRef} className={className ? `${styles.hero} ${className}` : styles.hero}>
-      <img ref={imageRef} className={styles.image} src={image} alt={alt} />
+      <img
+        ref={imageRef}
+        className={styles.image}
+        src={sizedUrl(image.url, 2400)}
+        alt={image.alt}
+        /* Only set when a focal point was chosen in Studio; the page's own
+           object-position variable applies otherwise. */
+        style={focalStyle(image)}
+      />
       <div className={styles.scrim} />
       <div className={styles.content}>
         <p className={styles.eyebrow} data-reveal="0">

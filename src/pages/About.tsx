@@ -1,30 +1,27 @@
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import buttons from '../components/buttons.module.css'
+import { ContentStatus } from '../components/ContentStatus'
 import { CtaBand } from '../components/CtaBand'
 import { PageHero } from '../components/PageHero'
 import { ParallaxBand } from '../components/ParallaxBand'
-import { aboutPage } from '../content/about'
+import { useContent } from '../content/useContent'
 import { useRevealGroup } from '../hooks/useRevealGroup'
 import { usePageTitle } from '../hooks/usePageTitle'
 import styles from './About.module.css'
 
 export function About() {
   const pageRef = useRef<HTMLDivElement>(null)
+  const content = useContent('about')
   useRevealGroup(pageRef)
   usePageTitle('About Us | Remember When Photo Booth')
 
-  const { hero, intro, band, closing, cta } = aboutPage
+  if (content.status !== 'ready') return <ContentStatus {...content} />
+  const { hero, intro, band, closing, cta } = content.data
 
   return (
     <div ref={pageRef}>
-      <PageHero
-        eyebrow={hero.eyebrow}
-        title={hero.title}
-        image={hero.image}
-        alt={hero.imageAlt}
-        className={styles.hero}
-      />
+      <PageHero eyebrow={hero.eyebrow} title={hero.title} image={hero.image} className={styles.hero} />
 
       <section className={styles.prose}>
         <div className={styles.column}>
@@ -43,7 +40,6 @@ export function About() {
 
       <ParallaxBand
         image={band.image}
-        alt={band.imageAlt}
         className={styles.band}
         drift={110}
         scaleBase={1}

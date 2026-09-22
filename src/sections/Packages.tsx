@@ -1,28 +1,30 @@
 import { Link } from 'react-router-dom'
-import { packages } from '../content/home'
+import type { HomeContent } from '../content/types'
 import styles from './Packages.module.css'
 import shared from './shared.module.css'
 
-export function Packages() {
+type PackagesProps = Pick<HomeContent, 'packagesIntro' | 'packages'>
+
+export function Packages({ packagesIntro, packages }: PackagesProps) {
   return (
     <section className={styles.section}>
       <p className={shared.eyebrow} data-reveal="60">
-        PACKAGES
+        {packagesIntro.eyebrow}
       </p>
 
       <div className={styles.headingRow}>
         <h2 className={styles.heading} data-reveal="80">
-          Simple, all-in pricing
+          {packagesIntro.heading}
         </h2>
         <Link to="/services" className={styles.moreLink} data-reveal="160">
-          See everything included →
+          {packagesIntro.linkLabel}
         </Link>
       </div>
 
       <div className={styles.grid}>
         {packages.map((pack, index) => (
           <Link
-            key={pack.name}
+            key={pack._key}
             to="/services"
             className={pack.popular ? `${styles.card} ${styles.cardPopular}` : styles.card}
             data-reveal={index * 90}

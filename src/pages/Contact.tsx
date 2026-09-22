@@ -1,8 +1,11 @@
 import { useRef, useState } from 'react'
 import type { FormEvent } from 'react'
+import { ContentStatus } from '../components/ContentStatus'
 import { PageHero } from '../components/PageHero'
-import { contactPage } from '../content/contact'
-import { site } from '../content/site'
+import type { SiteSettings } from '../content/types'
+import { useContent } from '../content/useContent'
+import { focalStyle, sizedUrl } from '../lib/images'
+import { telHref } from '../lib/phone'
 import type { InquiryFields } from '../lib/inquiry'
 import { sendInquiry } from '../lib/inquiry'
 import { buildInquiryMailto } from '../lib/mailto'
@@ -12,14 +15,13 @@ import styles from './Contact.module.css'
 
 type Status = 'idle' | 'sending' | 'sent' | 'error'
 
-export function Contact() {
+export function Contact({ settings }: { settings: SiteSettings }) {
   const pageRef = useRef<HTMLDivElement>(null)
   const [status, setStatus] = useState<Status>('idle')
   const [fallback, setFallback] = useState('')
+  const content = useContent('contact')
   useRevealGroup(pageRef)
   usePageTitle('Contact | Remember When Photo Booth')
-
-  const { hero, feature, form } = contactPage
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -44,10 +46,13 @@ export function Contact() {
       setStatus('sent')
     } catch {
       /* Never swallow it: hand the visitor a way to reach the inbox anyway. */
-      setFallback(buildInquiryMailto(site.email, fields))
+      setFallback(buildInquiryMailto(settings.email, fields))
       setStatus('error')
     }
   }
+
+  if (content.status !== 'ready') return <ContentStatus {...content} />
+  const { hero, featureImage, form } = content.data
 
   return (
     <div ref={pageRef}>
@@ -56,7 +61,6 @@ export function Contact() {
         title={hero.title}
         lead={hero.lead}
         image={hero.image}
-        alt={hero.imageAlt}
         className={styles.hero}
       />
 
@@ -65,46 +69,50 @@ export function Contact() {
           <div className={styles.panel} data-reveal="0">
             <img
               className={styles.panelImage}
-              src={feature.image}
-              alt={feature.imageAlt}
+              src={sizedUrl(featureImage.url, 1400)}
+              alt={featureImage.alt}
+              style={focalStyle(featureImage)}
               loading="lazy"
             />
             <div className={styles.panelScrim} />
             <div className={styles.channels}>
-              <a href={site.phone.href} className={styles.channel}>
+              <a href={telHref(settings.phone)} className={styles.channel}>
                 <span>
                   <span className={styles.channelLabel}>PHONE · CALL OR TEXT</span>
-                  <span className={styles.channelValue}>{site.phone.display}</span>
+                  <span className={styles.channelValue}>{settings.phone}</span>
                 </span>
                 <span className={styles.channelArrow} aria-hidden="true">
                   →
                 </span>
               </a>
 
-              <a href={`mailto:${site.email}`} className={styles.channel}>
+              <a href={`mailto:${settings.email}`} className={styles.channel}>
                 <span className={styles.channelText}>
                   <span className={styles.channelLabel}>EMAIL</span>
-                  <span className={styles.channelEmail}>{site.email}</span>
+                  <span className={styles.channelEmail}>{settings.email}</span>
                 </span>
                 <span className={styles.channelArrow} aria-hidden="true">
                   →
                 </span>
               </a>
 
-              <a
-                href={site.instagram.url}
-                target="_blank"
-                rel="noopener"
-                className={styles.channel}
-              >
-                <span>
-                  <span className={styles.channelLabel}>INSTAGRAM</span>
-                  <span className={styles.channelValue}>{site.instagram.handle}</span>
-                </span>
-                <span className={styles.channelArrow} aria-hidden="true">
-                  →
-                </span>
-              </a>
+              {settings.socials.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener"
+                  className={styles.channel}
+                >
+                  <span>
+                    <span className={styles.channelLabel}>{social.label}</span>
+                    <span className={styles.channelValue}>{settings.socialHandle}</span>
+                  </span>
+                  <span className={styles.channelArrow} aria-hidden="true">
+                    →
+                  </span>
+                </a>
+              ))}
             </div>
           </div>
 

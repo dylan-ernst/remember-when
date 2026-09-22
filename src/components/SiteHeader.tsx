@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import logoMark from '../assets/logo-mark.png'
-import { navLinks, site } from '../content/site'
+import { navLinks } from '../content/nav'
+import type { SiteSettings } from '../content/types'
 import { useIsMobile } from '../hooks/useMediaQuery'
+import { telHref } from '../lib/phone'
 import styles from './SiteHeader.module.css'
 
-export function SiteHeader() {
+export function SiteHeader({ settings }: { settings: SiteSettings }) {
   const [menuOpen, setMenuOpen] = useState(false)
+  const phoneHref = telHref(settings.phone)
   const isMobile = useIsMobile()
   const location = useLocation()
 
@@ -36,7 +39,7 @@ export function SiteHeader() {
     <>
       <header className={styles.header}>
         <Link to="/" className={styles.brand}>
-          <img src={logoMark} alt={`${site.name} logo`} className={styles.mark} />
+          <img src={logoMark} alt={`${settings.name} logo`} className={styles.mark} />
           <span className={styles.wordmark}>
             Remember When
             <br />
@@ -57,7 +60,7 @@ export function SiteHeader() {
           ))}
           {/* On the contact page itself, the pill offers the faster route. */}
           {location.pathname === '/contact' ? (
-            <a href={site.phone.href} className={styles.bookButton}>
+            <a href={phoneHref} className={styles.bookButton}>
               CALL US
             </a>
           ) : (
@@ -109,8 +112,8 @@ export function SiteHeader() {
             ))}
           </nav>
 
-          <a href={site.phone.href} className={styles.overlayPhone}>
-            Call or text {site.phone.display}
+          <a href={phoneHref} className={styles.overlayPhone}>
+            Call or text {settings.phone}
           </a>
         </div>
       )}

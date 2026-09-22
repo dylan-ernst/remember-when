@@ -73,6 +73,7 @@
 .channelLabel {
   display: block;
   margin-bottom: 4px;
+  text-transform: uppercase;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 13px;

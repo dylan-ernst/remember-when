@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { testimonials } from '../content/home'
+import type { HomeContent } from '../content/types'
 import styles from './Testimonials.module.css'
 
 /* How long the top card takes to fly off before the deck advances. */
@@ -8,7 +8,9 @@ const FLY_MS = 480
 /* Only the front three cards of the stack are drawn. */
 const VISIBLE_CARDS = 3
 
-export function Testimonials() {
+type TestimonialsProps = Pick<HomeContent, 'testimonialsHeading' | 'testimonials'>
+
+export function Testimonials({ testimonialsHeading, testimonials }: TestimonialsProps) {
   const [index, setIndex] = useState(0)
   const [flying, setFlying] = useState(false)
   const [expanded, setExpanded] = useState(false)
@@ -51,7 +53,7 @@ export function Testimonials() {
   return (
     <section className={styles.section}>
       <h2 className={styles.heading} data-reveal="0">
-        Kind words from the&nbsp;dance&nbsp;floor
+        {testimonialsHeading}
       </h2>
 
       <div
@@ -86,7 +88,7 @@ export function Testimonials() {
 
           return (
             <figure
-              key={testimonial.who}
+              key={testimonial._key}
               className={classNames.join(' ')}
               style={
                 flyingOff
@@ -130,7 +132,7 @@ export function Testimonials() {
       <div className={styles.dots} aria-hidden="true">
         {testimonials.map((testimonial, dotIndex) => (
           <span
-            key={testimonial.who}
+            key={testimonial._key}
             className={dotIndex === index ? `${styles.dot} ${styles.dotActive}` : styles.dot}
           />
         ))}

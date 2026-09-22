@@ -4,18 +4,23 @@ import buttons from '../components/buttons.module.css'
 import { CtaBand } from '../components/CtaBand'
 import { PageHero } from '../components/PageHero'
 import { ParallaxBand } from '../components/ParallaxBand'
-import { addons, servicesPage, tiers } from '../content/services'
-import { site } from '../content/site'
+import { focalStyle, sizedUrl } from '../lib/images'
+import { ContentStatus } from '../components/ContentStatus'
+import type { SiteSettings } from '../content/types'
+import { useContent } from '../content/useContent'
+import { telHref } from '../lib/phone'
 import { useRevealGroup } from '../hooks/useRevealGroup'
 import { usePageTitle } from '../hooks/usePageTitle'
 import styles from './Services.module.css'
 
-export function Services() {
+export function Services({ settings }: { settings: SiteSettings }) {
   const pageRef = useRef<HTMLDivElement>(null)
+  const content = useContent('services')
   useRevealGroup(pageRef)
   usePageTitle('Services | Remember When Photo Booth')
 
-  const { hero, band, addonsHeading, cta } = servicesPage
+  if (content.status !== 'ready') return <ContentStatus {...content} />
+  const { hero, tiers, band, addonsIntro, addons, cta } = content.data
 
   return (
     <div ref={pageRef}>
@@ -24,7 +29,6 @@ export function Services() {
         title={hero.title}
         lead={hero.lead}
         image={hero.image}
-        alt={hero.imageAlt}
         className={styles.hero}
       />
 
@@ -32,7 +36,7 @@ export function Services() {
         <div className={styles.tiers}>
           {tiers.map((tier, index) => (
             <div
-              key={tier.name}
+              key={tier._key}
               className={tier.popular ? `${styles.tier} ${styles.tierPopular}` : styles.tier}
               data-reveal={index * 100}
             >
@@ -67,7 +71,6 @@ export function Services() {
 
       <ParallaxBand
         image={band.image}
-        alt={band.imageAlt}
         className={styles.band}
         drift={110}
       >
@@ -80,20 +83,21 @@ export function Services() {
       <section className={styles.addonsSection}>
         <div className={styles.addonsInner}>
           <p className={styles.addonsEyebrow} data-reveal="0">
-            {addonsHeading.eyebrow}
+            {addonsIntro.eyebrow}
           </p>
           <h2 className={styles.addonsHeading} data-reveal="80">
-            {addonsHeading.heading}
+            {addonsIntro.heading}
           </h2>
 
           <div className={styles.addons}>
             {addons.map((addon, index) => (
-              <div key={addon.name} className={styles.addon} data-reveal={index * 70}>
+              <div key={addon._key} className={styles.addon} data-reveal={index * 70}>
                 <span className={styles.addonFrame}>
                   <img
                     className={styles.addonImage}
-                    src={addon.image}
-                    alt={addon.name}
+                    src={sizedUrl(addon.image.url, 700)}
+                    alt={addon.image.alt}
+                    style={focalStyle(addon.image)}
                     loading="lazy"
                   />
                 </span>
@@ -114,8 +118,8 @@ export function Services() {
         <Link to="/contact" className={buttons.solid}>
           {cta.primaryLabel}
         </Link>
-        <a href={site.phone.href} className={buttons.quiet}>
-          Call or text {site.phone.display}
+        <a href={telHref(settings.phone)} className={buttons.quiet}>
+          Call or text {settings.phone}
         </a>
       </CtaBand>
     </div>
