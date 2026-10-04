@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import aboutTeamPhoto from '../assets/photos/about-team.webp'
 import { Link } from 'react-router-dom'
 import buttons from '../components/buttons.module.css'
 import { ContentStatus } from '../components/ContentStatus'
@@ -21,7 +22,7 @@ export function About() {
 
   return (
     <div ref={pageRef}>
-      <PageHero eyebrow={hero.eyebrow} title={hero.title} image={hero.image} className={styles.hero} />
+      <PageHero eyebrow={hero.eyebrow} title={hero.title} image={{ url: aboutTeamPhoto, alt: 'Shayne and his wife wearing Remember When Photo Booth shirts in front of a gold backdrop' }} className={styles.hero} />
 
       <section className={styles.prose}>
         <div className={styles.column}>
