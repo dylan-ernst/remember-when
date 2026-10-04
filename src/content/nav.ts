@@ -7,14 +7,14 @@ export type NavLink = {
 export const navLinks: readonly NavLink[] = [
   { label: 'HOME', to: '/' },
   { label: 'ABOUT US', to: '/about' },
-  { label: 'SERVICES', to: '/services' },
+  { label: 'PACKAGES', to: '/services' },
   { label: 'CONTACT', to: '/contact' },
 ]
 
 export const footerLinks: readonly NavLink[] = [
   { label: 'Home', to: '/' },
   { label: 'About Us', to: '/about' },
-  { label: 'Services', to: '/services' },
+  { label: 'Packages', to: '/services' },
   { label: 'Contact', to: '/contact' },
 ]
 
