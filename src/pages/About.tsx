@@ -47,8 +47,9 @@ export function About() {
         scaleRange={0.05}
       >
         <p className={styles.bandLine}>
-          {band.lead}
-          <span className={styles.accent}>{band.accent}</span>
+          It’s more than a photo booth. It’s a way to{' '}
+          <span className={styles.accent}>freeze a feeling</span>
+          {' and bring you back to a moment worth remembering.'}
         </p>
       </ParallaxBand>
 
