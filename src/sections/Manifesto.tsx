@@ -4,15 +4,22 @@ import type { HomeContent } from '../content/types'
 import styles from './Manifesto.module.css'
 
 export function Manifesto({ manifesto }: Pick<HomeContent, 'manifesto'>) {
+  const displayManifesto = {
+    ...manifesto,
+    lead: 'It’s more than a photo booth. It’s a way to ',
+    accent: 'freeze a feeling',
+    trail: ' and bring you back to a moment worth remembering.',
+  }
+
   return (
     <ParallaxBand
       image={{ url: boothSetupPhoto, alt: 'Remember When Photo Booth setup with an umbrella light, black backdrop, and props table at an outdoor party' }}
       className={styles.band}
     >
       <p className={styles.line}>
-        {manifesto.lead}
-        <span className={styles.accent}>{manifesto.accent}</span>
-        {manifesto.trail}
+        {displayManifesto.lead}
+        <span className={styles.accent}>{displayManifesto.accent}</span>
+        {displayManifesto.trail}
       </p>
     </ParallaxBand>
   )
